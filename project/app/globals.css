@@ -1,9 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary-100: #FFE8F0;
+  --primary: #EE2B69;
+  --secondary: #FBE843;
+
+  --black-100: #333333;
+  --black-200: #141413;
+  --black-300: #7D8087;
+  --black: #000000;
+
+  --white-100: #F7F7F7;
+  --white: #FFFFFF;
+
+  --radius: 8px; /* Adjust as needed */
 }
+
+/* Border Radius */
+.lg-rounded { border-radius: var(--radius); }
+.md-rounded { border-radius: calc(var(--radius) - 2px); }
+.sm-rounded { border-radius: calc(var(--radius) - 4px); }
+
+/* Shadows */
+.shadow-100 { box-shadow: 2px 2px 0px 0px rgb(0, 0, 0); }
+.shadow-200 { box-shadow: 2px 2px 0px 2px rgb(0, 0, 0); }
+.shadow-300 { box-shadow: 2px 2px 0px 2px rgb(238, 43, 105); }
+
+/* Typography */
+.work-sans { font-family: var(--font-work-sans), sans-serif; }
 
 @theme inline {
   --color-background: var(--background);
