@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { formatDate } from '@/lib/utils';
 import { EyeIcon } from 'lucide-react';
 import { Button } from './ui/button';
+import { Author, Startup } from '@/sanity/types';
+
+export type StartupTypeCard = Omit<Startup, 'author'> & { author?: Author, category?: string }
 
 const StartupCard = ({post}: {post: StartupTypeCard}) => {
   return (
@@ -44,7 +47,7 @@ const StartupCard = ({post}: {post: StartupTypeCard}) => {
       </Link>
 
       <div className='flex-between gap-3 mt-5 '>
-        <Link href={`/?query=${post.category.toLowerCase()}`}>
+      <Link href={`/?query=${post.category ? post.category.toLowerCase() : ''}`}>
           <p className='text-16-medium'>{post.category}</p>
         </Link>
         <Button className='startup-card_btn' asChild>
