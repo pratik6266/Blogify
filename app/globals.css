@@ -195,11 +195,12 @@
   }
 
   .profile_card {
-    @apply w-80 px-6 pb-6 pt-20 flex flex-col justify-center items-center bg-[--primary] border-[5px] border-[--black-200] shadow-md rounded-[30px] relative z-0 h-fit max-lg:w-full;
+    @apply w-80 px-6 pb-6 pt-20 flex flex-col justify-center items-center bg-pink-600 border-[5px] border-black shadow-md 
+    rounded-[30px] relative z-0 h-fit max-lg:w-full;
   }
 
   .profile_title {
-    @apply w-11/12 bg-[--white-100] border-[5px] border-[--black-200] rounded-[20px] px-5 py-3 absolute -top-9 shadow-md;
+    @apply w-11/12 bg-white border-[5px] border-black rounded-[20px] px-5 py-3 absolute -top-9 shadow-md;
   }
   .profile_title::before {
     content: '';
