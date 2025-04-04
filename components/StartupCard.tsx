@@ -40,7 +40,7 @@ const StartupCard = ({post}: {post: StartupTypeCard}) => {
       </div>
 
       <Link href={`/startup/${post._id}`}>
-        <p className='startup-card-desc'>
+        <p className='startup-card-desc mb-3 mt-4'>
           {post.description}
         </p>
         <img src={post.image} alt="placeholder" className='startup-card_img'/>
@@ -48,7 +48,7 @@ const StartupCard = ({post}: {post: StartupTypeCard}) => {
 
       <div className='flex-between gap-3 mt-5 '>
       <Link href={`/?query=${post.category ? post.category.toLowerCase() : ''}`}>
-          <p className='text-16-medium'>{post.category}</p>
+          <p className='text-16-medium bg-pink-50 px-3 py-2 rounded-2xl'>{post.category}</p>
         </Link>
         <Button className='startup-card_btn' asChild>
           <Link href={`/startup/${post._id}`}>
