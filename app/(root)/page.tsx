@@ -4,7 +4,6 @@ import StartupCard, { StartupTypeCard } from '@/components/StartupCard';
 import { STARTUPS_QUERY } from '@/sanity/lib/queries';
 import { sanityFetch } from '@/sanity/lib/lives';
 import { SanityLive } from '@/sanity/lib/lives';
-import { auth } from '@/auth';
 
 export default async function Home({ searchParams }: 
   { searchParams: Promise<{ query?: string }>}) {

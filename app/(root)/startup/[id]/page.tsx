@@ -1,5 +1,5 @@
 import { client } from '@/sanity/lib/client';
-import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries';
+import { PLAYLIST_BY_SLUG_QUERY, STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries';
 import { notFound } from 'next/navigation';
 import React, { Suspense } from 'react'
 export const experimental_ppr = true;
@@ -9,6 +9,7 @@ import Image from 'next/image';
 import markdownit from 'markdown-it';
 import { Skeleton } from '@/components/ui/skeleton';
 import Views from '@/components/Views';
+import StartupCard, { StartupTypeCard } from '@/components/StartupCard';
 
 const md = markdownit();
 
@@ -16,6 +17,7 @@ const page = async ({ params }: { params: Promise<{id: string}>}) => {
   const id = (await params). id;
   const post = await client.fetch(STARTUP_BY_ID_QUERY, { id });
   if(!post) return notFound(); 
+  const { select: editorPosts } = await client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: 'editors-picks'})
   const parseContent = md.render(post?.pitch || '');
   return (
     <>
@@ -26,7 +28,7 @@ const page = async ({ params }: { params: Promise<{id: string}>}) => {
       </section>
 
       <section className='section_container flex-wrap items-center justify-center'>
-        <img src={post.image} alt="thumbnail" className='w-full h-auto rounded-xl' />
+        <Image src={post.image} alt="thumbnail" width={800} height={600} className='w-full h-auto rounded-xl' />
 
         <div className='space-y-5 mt-10 max-w-4xl mx-auto'>
           <div className='flex-between gap-5'>
@@ -40,7 +42,7 @@ const page = async ({ params }: { params: Promise<{id: string}>}) => {
             <p className='category-tag'>{post.category}</p>
           </div>
 
-          <h3 className='text-30-bold'>What's Inside</h3>
+          <h3 className='text-30-bold'>What&#39;s Inside</h3>
           {parseContent ? (
             <article className='prose max-w-4xl font-work-sans break-all'
               dangerouslySetInnerHTML={{ __html: parseContent }}  
@@ -53,6 +55,20 @@ const page = async ({ params }: { params: Promise<{id: string}>}) => {
         </div>
 
         <hr className='divider' />
+
+        {editorPosts?.length > 0 && (
+        <div className='max-w-4xl mx-auto'>
+          <p className='text-30-semibold'>Editors&#39;s Picks</p>
+          <ul className='mt-7 card_grid-sm'>
+            {editorPosts
+              .filter((p: StartupTypeCard) => p._id !== post._id)
+              .map((post: StartupTypeCard, index: number) => (
+                <StartupCard key={index} post={post} />
+              ))}
+          </ul>
+        </div>
+      )}
+
 
         <Suspense fallback={<Skeleton className='view_skeleton' />}>
           <Views id={post._id} />
