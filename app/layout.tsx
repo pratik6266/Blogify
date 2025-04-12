@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from '@vercel/analytics/next';
 
 const workSans = localFont({
   src: [
@@ -70,6 +70,7 @@ export default function RootLayout({
         className={workSans.variable}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
